@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
   try {
     const apiKey = process.env.API_KEY;
-    const email = req.body?.email;
+    const email = req.body?.email?.trim();
 
     if (!apiKey) {
       return res.status(500).json({
@@ -28,7 +28,6 @@ module.exports = async (req, res) => {
     url.searchParams.set("apikey", apiKey);
     url.searchParams.set("email", email);
 
-    // API Yun menggunakan GET
     const response = await fetch(url.toString(), {
       method: "GET"
     });
